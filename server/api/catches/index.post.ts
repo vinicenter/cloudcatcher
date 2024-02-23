@@ -8,6 +8,6 @@ export default defineEventHandler(async (event) => {
   })
 
   return {
-    body: 'Catch created!',
+    message: 'Success!'
   }
 })
