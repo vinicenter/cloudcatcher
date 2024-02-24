@@ -1,7 +1,11 @@
 import { getPublicUrlForS3Object } from "~/server/utils/bucket"
 import { initS3Client } from "../../utils/bucket"
+import { useAuthenticated } from "~/server/composables/use-authenticated"
+import { tables, useDB } from "~/server/composables/use-db"
 
 export default defineEventHandler(async (event) => {
+  await useAuthenticated(event, true)
+
   const body = await readFormData(event)
 
   const image = body.get('image') as File
