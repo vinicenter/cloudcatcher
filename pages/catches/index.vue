@@ -1,5 +1,11 @@
 <script setup lang="ts">
 const { data } = useFetch('/api/catches')
+
+const env = useRuntimeConfig()
+
+const formatImageUrl = (image: string) => {
+	return `${env.public.BUCKET_R2_PUBLIC_ENDPOINT}/${image}`
+}
 </script>
 
 <template>
@@ -9,9 +15,7 @@ const { data } = useFetch('/api/catches')
 				{{ capture.title }}
 			</template>
 
-			<div>
-				{{ capture.ipfsCid }}
-			</div>
+			<img :src="formatImageUrl(capture.image)">
 
 			<template #footer>
 				{{ capture.createdAt }}

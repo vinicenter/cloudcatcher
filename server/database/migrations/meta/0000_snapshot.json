@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "sqlite",
-  "id": "10382789-ae8d-49b8-8596-524ee36f18bd",
+  "id": "2687d37c-1625-40fc-8d04-4affbaa9f509",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "catches": {
@@ -21,8 +21,8 @@
           "notNull": true,
           "autoincrement": false
         },
-        "ipfs_cid": {
-          "name": "ipfs_cid",
+        "image": {
+          "name": "image",
           "type": "text",
           "primaryKey": false,
           "notNull": true,

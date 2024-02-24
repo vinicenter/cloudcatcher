@@ -11,17 +11,22 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.521.0",
+    "@aws-sdk/s3-request-presigner": "^3.521.0",
     "@iconify-json/mdi": "^1.1.64",
     "@libsql/client": "^0.5.1",
     "better-sqlite3": "^9.4.3",
     "drizzle-kit": "^0.20.14",
     "drizzle-orm": "^0.29.4",
-    "nuxt": "^3.10.3",
+    "h3": "^1.10.2",
+    "nitropack": "^2.8.1",
+    "nuxt": "3.10.3",
     "pathe": "^1.1.2",
     "vue": "^3.4.19",
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
-    "@nuxt/ui": "^2.14.0"
+    "@nuxt/ui": "^2.14.0",
+    "@nuxtjs/tailwindcss": "^6.11.4"
   }
 }

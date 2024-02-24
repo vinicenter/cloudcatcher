@@ -1,23 +1,22 @@
 <script setup lang="ts">
-const data = reactive({
-  title: '',
-  ipfsCid: '',
-})
+const submit = (e: Event) => {
+  if (!(e.target instanceof HTMLFormElement)) return;
 
-const submit = () => {
+  const form = new FormData(e.target);
+
   $fetch('/api/catches', {
     method: 'POST',
-    body: JSON.stringify(data),
+    body: form,
   })
 }
 </script>
 
 <template>
-  <div>
-    <input v-model="data.title" placeholder="Title" />
-  
-    <input v-model="data.ipfsCid" placeholder="IPFS CID" />
-  
-    <button @click="submit">Submit</button>
-  </div>
+  <form @submit.prevent="submit">
+    <input name="title" placeholder="Title" required />
+
+    <input type="file" name="image" placeholder="Image" required />
+
+    <button type="submit">Submit</button>
+  </form>
 </template>
