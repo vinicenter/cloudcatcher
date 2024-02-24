@@ -3,12 +3,14 @@ import { H3Event } from 'h3'
 
 type BucketPaths = 'catches'
 
-export const initAwsClient = (event: H3Event) => {
+export const initS3Client = (event: H3Event) => {
   const runtimeConfig = useRuntimeConfig(event)
 
   const s3 = new AwsClient({
     accessKeyId: runtimeConfig.BUCKET_R2_ACCESS_KEY_ID,
     secretAccessKey: runtimeConfig.BUCKET_R2_SECRET_ACCESS_KEY,
+    region: runtimeConfig.BUCKET_R2_REGION,
+    service: 's3'
   })
 
   return s3
@@ -29,15 +31,13 @@ export const uploadFileToBucket = async (event: H3Event, awsClient: AwsClient, p
 
   const buffer = Buffer.from(await file.arrayBuffer())
 
-  const response = await awsClient.fetch(`${runtimeConfig.BUCKET_R2_ENDPOINT}/${path}`, {
+  const response = await awsClient.fetch(`${runtimeConfig.BUCKET_R2_ENDPOINT}/${path}/${file.name}`, {
     method: 'POST',
     headers: {
       'Content-Type': file.type,
     },
     body: buffer,
   })
-
-  console.log(JSON.stringify(response))
 
   return response
 }
