@@ -26,12 +26,12 @@ export const getPublicUrlForS3Object = (event: H3Event, path: BucketPaths, key: 
   }
 }
 
-export const uploadFileToBucket = async (event: H3Event, awsClient: AwsClient, path: BucketPaths, file: File) => {
+export const uploadFileToBucket = async (event: H3Event, s3Client: AwsClient, path: BucketPaths, file: File) => {
   const runtimeConfig = useRuntimeConfig(event)
 
   const buffer = Buffer.from(await file.arrayBuffer())
 
-  const response = await awsClient.fetch(`${runtimeConfig.BUCKET_R2_ENDPOINT}/${path}/${file.name}`, {
+  const response = await s3Client.fetch(`${runtimeConfig.BUCKET_R2_ENDPOINT}/${path}/${file.name}`, {
     method: 'POST',
     headers: {
       'Content-Type': file.type,
