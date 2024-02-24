@@ -37,5 +37,7 @@ export const uploadFileToBucket = async (event: H3Event, awsClient: AwsClient, p
     body: buffer,
   })
 
+  console.log(response)
+
   return response
 }
