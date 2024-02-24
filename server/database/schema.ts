@@ -1,4 +1,3 @@
-import { uuid } from 'drizzle-orm/pg-core';
 import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core'
 
 export const catches = sqliteTable('catches', {

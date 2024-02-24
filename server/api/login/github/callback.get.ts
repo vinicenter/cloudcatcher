@@ -1,11 +1,11 @@
 import { OAuth2RequestError } from "arctic";
 import { eq } from "drizzle-orm";
 import { generateId } from "lucia";
-import { useAuth } from "~/server/composables/use-auth";
-import { tables, useDB } from "~/server/composables/use-db";
+import { auth } from "~/server/utils/auth";
+import { tables, useDB } from "~/server/utils/db";
 
 export default defineEventHandler(async (event) => {
-	const auth = useAuth(event);
+	const { lucia, github } = auth(event);
 	const query = getQuery(event);
 	const code = query.code?.toString() ?? null;
 	const state = query.state?.toString() ?? null;
@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
 	}
 
 	try {
-		const tokens = await auth.github.validateAuthorizationCode(code);
+		const tokens = await github.validateAuthorizationCode(code);
 		const githubUserResponse = await fetch("https://api.github.com/user", {
 			headers: {
 				Authorization: `Bearer ${tokens.accessToken}`
@@ -29,8 +29,8 @@ export default defineEventHandler(async (event) => {
     const [ existingUser ] = await useDB().select().from(tables.users).where(eq(tables.users.github_id, githubUser.id))
 
 		if (existingUser) {
-			const session = await auth.lucia.createSession(existingUser.id, {});
-			appendHeader(event, "Set-Cookie", auth.lucia.createSessionCookie(session.id).serialize());
+			const session = await lucia.createSession(existingUser.id, {});
+			appendHeader(event, "Set-Cookie", lucia.createSessionCookie(session.id).serialize());
 			return sendRedirect(event, "/");
 		}
 
@@ -43,8 +43,8 @@ export default defineEventHandler(async (event) => {
 			id: userId
     })
 
-		const session = await auth.lucia.createSession(userId, {});
-		appendHeader(event, "Set-Cookie", auth.lucia.createSessionCookie(session.id).serialize());
+		const session = await lucia.createSession(userId, {});
+		appendHeader(event, "Set-Cookie", lucia.createSessionCookie(session.id).serialize());
 		return sendRedirect(event, "/");
 	} catch (e) {
     console.log(e)

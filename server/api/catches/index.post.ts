@@ -1,10 +1,10 @@
 import { getPublicUrlForS3Object } from "~/server/utils/bucket"
 import { initS3Client } from "../../utils/bucket"
-import { useAuthenticated } from "~/server/composables/use-authenticated"
-import { tables, useDB } from "~/server/composables/use-db"
+import { tables, useDB } from "~/server/utils/db"
+import { authenticated } from "~/server/utils/authenticated"
 
 export default defineEventHandler(async (event) => {
-  await useAuthenticated(event, true)
+  await authenticated(event, true)
 
   const body = await readFormData(event)
 

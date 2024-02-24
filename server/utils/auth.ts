@@ -2,11 +2,11 @@ import { Lucia } from "lucia";
 import { DrizzleSQLiteAdapter } from "@lucia-auth/adapter-drizzle";
 import { GitHub } from "arctic";
 import { H3Event } from "h3";
-import { tables, useDB } from "./use-db";
+import { tables, useDB } from "./db";
 
 const adapter = new DrizzleSQLiteAdapter(useDB(), tables.sessions, tables.users)
 
-export const useAuth = (event: H3Event) => {
+export const auth = (event: H3Event) => {
   const runtimeConfig = useRuntimeConfig(event)
 
   const luciaInstance = new Lucia(adapter, {
@@ -33,7 +33,7 @@ export const useAuth = (event: H3Event) => {
 
 declare module "lucia" {
 	interface Register {
-		Lucia: ReturnType<typeof useAuth>['lucia'];
+		Lucia: ReturnType<typeof auth>['lucia'];
 		DatabaseUserAttributes: DatabaseUserAttributes;
 	}
 }

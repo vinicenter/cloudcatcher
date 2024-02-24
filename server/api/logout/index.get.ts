@@ -1,21 +1,21 @@
 import { H3Event } from "h3";
-import { useAuth } from "~/server/composables/use-auth";
-import { useAuthenticated } from "~/server/composables/use-authenticated";
+import { auth } from "~/server/utils/auth";
+import { authenticated } from "~/server/utils/authenticated";
 
 export default defineEventHandler(async (event: H3Event) => {
-  const auth = useAuth(event);
+  const { lucia } = auth(event);
 
-  const authenticated = await useAuthenticated(event, false);
+  const { session, user } = await authenticated(event, false);
 
-  if(authenticated.user) {
-    await auth.lucia.invalidateUserSessions(authenticated.user.id)
+  if(user) {
+    await lucia.invalidateUserSessions(user.id)
   }
 
-  if(authenticated.session) {
-    await auth.lucia.invalidateSession(authenticated.session.id)
+  if(session) {
+    await lucia.invalidateSession(session.id)
   }
 
-  appendHeader(event, "Set-Cookie", auth.lucia.createBlankSessionCookie().serialize());
+  appendHeader(event, "Set-Cookie", lucia.createBlankSessionCookie().serialize());
 
   return {
     message: "success"

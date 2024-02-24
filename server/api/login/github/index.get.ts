@@ -1,12 +1,12 @@
 import { generateState } from "arctic";
 import { H3Event } from "h3";
-import { useAuth } from "~/server/composables/use-auth";
+import { auth } from "~/server/utils/auth";
 
 export default defineEventHandler(async (event: H3Event) => {
-	const auth = useAuth(event);
+	const { github } = auth(event);
 
 	const state = generateState();
-	const url = await auth.github.createAuthorizationURL(state);
+	const url = await github.createAuthorizationURL(state);
 
 	setCookie(event, "github_oauth_state", state, {
 		path: "/",

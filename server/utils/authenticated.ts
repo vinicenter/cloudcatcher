@@ -1,8 +1,8 @@
 import { H3Event } from "h3"
-import { useAuth } from "./use-auth"
+import { auth } from "./auth"
 
-export const useAuthenticated = async (event: H3Event, validate: boolean) => {
-  const auth = useAuth(event)
+export const authenticated = async (event: H3Event, validate: boolean) => {
+  const { lucia } = auth(event)
   const session = getCookie(event, 'auth_session')
 
   if(!session) {
@@ -16,7 +16,7 @@ export const useAuthenticated = async (event: H3Event, validate: boolean) => {
     return { session: null, user: null }
   }
 
-  const sessionData = await auth.lucia.validateSession(session)
+  const sessionData = await lucia.validateSession(session)
 
   if(!sessionData.session || !sessionData.user) {
     throw new Error('Invalid session')
