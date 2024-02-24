@@ -8,10 +8,9 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     DB: process.env.DB as string,
-    BUCKET_R2_ENDPOINT: process.env.NUXT_BUCKET_ENDPOINT as string,
+    BUCKET_R2_ENDPOINT: process.env.NUXT_BUCKET_R2_ENDPOINT as string,
     BUCKET_R2_ACCESS_KEY_ID: process.env.NUXT_BUCKET_R2_ACCESS_KEY_ID as string,
     BUCKET_R2_SECRET_ACCESS_KEY: process.env.NUXT_BUCKET_R2_SECRET_ACCESS_KEY as string,
-    BUCKET_R2_NAME: process.env.NUXT_BUCKET_R2_NAME as string,
     BUCKET_R2_REGION: process.env.NUXT_BUCKET_R2_REGION as string,
     public: {
       BUCKET_R2_PUBLIC_ENDPOINT: process.env.NUXT_BUCKET_R2_PUBLIC_ENDPOINT as string,

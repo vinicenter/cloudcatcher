@@ -11,10 +11,9 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.521.0",
-    "@aws-sdk/s3-request-presigner": "^3.521.0",
     "@iconify-json/mdi": "^1.1.64",
     "@libsql/client": "^0.5.1",
+    "aws4fetch": "1.0.13",
     "better-sqlite3": "^9.4.3",
     "drizzle-kit": "^0.20.14",
     "drizzle-orm": "^0.29.4",

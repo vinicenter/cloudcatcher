@@ -1,4 +1,5 @@
 import { getPublicUrlForS3Object } from "~/server/utils/bucket"
+import { initAwsClient } from "../../utils/bucket"
 
 export default defineEventHandler(async (event) => {
   const body = await readFormData(event)
@@ -6,9 +7,9 @@ export default defineEventHandler(async (event) => {
   const image = body.get('image') as File
   const title = body.get('title') as string
 
-  const s3Client = initS3Client(event, 'catches')
+  const s3Client = initAwsClient(event)
 
-  await uploadFileToS3(event, s3Client, image)
+  await uploadFileToBucket(event, s3Client, 'catches', image)
 
   const publicUrl = getPublicUrlForS3Object(event, 'catches', image.name)
 
