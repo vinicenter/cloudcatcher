@@ -4,8 +4,7 @@ export default defineNuxtConfig({
   modules: ["@nuxt/ui"],
   ui:{ icons: ['mdi'] },
   nitro: {
-    preset: "cloudflare-pages",
-    minify: false,
+    preset: "cloudflare-pages"
   },
   runtimeConfig: {
     DB: process.env.DB as string,
