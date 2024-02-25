@@ -20,8 +20,9 @@ export default defineEventHandler(async (event) => {
 		const tokens = await github.validateAuthorizationCode(code);
 		const githubUserResponse = await fetch("https://api.github.com/user", {
 			headers: {
-				Authorization: `Bearer ${tokens.accessToken}`
-			}
+				Authorization: `Bearer ${tokens.accessToken}`,
+				'User-Agent': 'request'
+			}		
 		});
 		const githubUser: GitHubUser = await githubUserResponse.json();
 
@@ -47,8 +48,6 @@ export default defineEventHandler(async (event) => {
 		appendHeader(event, "Set-Cookie", lucia.createSessionCookie(session.id).serialize());
 		return sendRedirect(event, "/");
 	} catch (e) {
-    console.log(e)
-
 		// the specific error message depends on the provider
 		if (e instanceof OAuth2RequestError) {
 			// invalid code
