@@ -1,0 +1,6 @@
+name = "cloudcatcher"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "cloudcatcher"
+database_id = "ee29c69e-ec06-47cf-bf62-5c4e55e64f22"
