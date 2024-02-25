@@ -26,7 +26,6 @@ export default defineEventHandler(async (event) => {
 		});
 		const githubUser: GitHubUser = await githubUserResponse.json();
 
-		// Replace this with your own DB client.
     const [ existingUser ] = await useDB().select().from(tables.users).where(eq(tables.users.github_id, githubUser.id))
 
 		if (existingUser) {
@@ -36,8 +35,6 @@ export default defineEventHandler(async (event) => {
 		}
 
 		const userId = generateId(15);
-
-		// Replace this with your own DB client.
     await useDB().insert(tables.users).values({
       username: githubUser.login,
       github_id: githubUser.id,
@@ -48,9 +45,7 @@ export default defineEventHandler(async (event) => {
 		appendHeader(event, "Set-Cookie", lucia.createSessionCookie(session.id).serialize());
 		return sendRedirect(event, "/");
 	} catch (e) {
-		// the specific error message depends on the provider
 		if (e instanceof OAuth2RequestError) {
-			// invalid code
 			throw createError({
 				status: 400
 			});

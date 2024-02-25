@@ -2,6 +2,11 @@
   "name": "nuxt-app",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": "20.5.1",
+    "pnpm": "8.15.4"
+  },
+  "engineStrict": true,
   "scripts": {
     "dev": "nuxt dev",
     "build": "nuxt build",
@@ -25,10 +30,12 @@
     "nuxt": "3.10.3",
     "pathe": "^1.1.2",
     "vue": "^3.4.19",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@nuxt/ui": "^2.14.0",
+    "@nuxtjs/i18n": "^8.1.1",
     "@nuxtjs/tailwindcss": "^6.11.4"
   }
 }

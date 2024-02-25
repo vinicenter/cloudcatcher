@@ -1,16 +1,14 @@
 <script setup lang="ts">
-const { data, execute } = useFetch('/api/user/whoami')
+const { isLogged } = useAuthState()
 
-const logout = async () => {
-	await $fetch('/api/logout')
-
-	execute()
+const login = () => {
+	window.location.assign('/api/login/github')
 }
 
 const navBarLinks = computed(() => [
 	{ name: 'Home', path: '/' },
 	{ name: 'Catches', path: '/catches' },
-	{ name: 'New catche', path: '/catches/new', disabled: !data.value },
+	{ name: 'New catche', path: '/catches/new', disabled: !isLogged.value },
 ]);
 </script>
 
@@ -33,26 +31,7 @@ const navBarLinks = computed(() => [
 					</template>
 				</div>
 
-				<a
-					v-if="!data"
-					href="/api/login/github"
-					class="hover:text-green-600 flex items-center justify-center"
-				>
-					<UButton v-if="!data">
-						Entrar
-						<UIcon class="text-xl" name="i-mdi-github" />
-					</UButton>
-				</a>
-
-				<div
-					v-else
-					class="hover:text-green-600 flex items-center justify-center"
-				>
-					<UButton @click="logout">
-						Sair
-						<UIcon class="text-xl" name="i-mdi-logout" />
-					</UButton>
-				</div>
+				<AccountPopover @login="login" />
 			</div>
 		</div>
 
