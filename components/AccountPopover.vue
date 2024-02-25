@@ -11,13 +11,13 @@ const {
 } = useFetch('/api/logout', {
   immediate: false,
   onResponse: () => {
-    refreshAuthState()
+    refreshAuthState();
+
+    window.location.assign('/')
   },
 })
 
-const emit = defineEmits<{
-  (e: 'login'): void
-}>()
+const login = () => window.location.assign('/api/login/github')
 </script>
 
 <template>
@@ -48,7 +48,7 @@ const emit = defineEmits<{
     </template>
   </UPopover>
 
-  <UButton v-else @click="emit('login')">
+  <UButton v-else @click="login">
     Login
 
     <UIcon class="text-xl" name="i-mdi-github" />

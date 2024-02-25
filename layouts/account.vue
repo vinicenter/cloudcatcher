@@ -6,7 +6,7 @@ const links = [{
   avatar: {
     alt: user.value?.username,
   },
-  to: '/account',
+  to: '/account/informations',
 }, {
   label: 'Delete account',
   icon: 'i-mdi-trash-can',

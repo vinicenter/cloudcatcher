@@ -2,7 +2,12 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ["@nuxt/ui"],
-  ui:{ icons: ["mdi"] },
+  ui:{
+    icons: ["mdi"],
+    notifications: {
+      position: 'top-0 bottom-auto'
+    }
+  },
   nitro: {
     preset: "cloudflare-pages"
   },

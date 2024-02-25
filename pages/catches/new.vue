@@ -1,4 +1,10 @@
 <script setup lang="ts">
+definePageMeta({
+  middleware: [ 'auth' ]
+})
+
+const toast = useToast()
+
 const submit = (e: Event) => {
   if (!(e.target instanceof HTMLFormElement)) return;
 
@@ -7,6 +13,18 @@ const submit = (e: Event) => {
   $fetch('/api/catches', {
     method: 'POST',
     body: form,
+    onResponseError: () => {
+      toast.add({
+        title: 'Error',
+        description: 'An error occurred while sending the request',
+      })
+    },
+    onResponse: () => {
+      toast.add({
+        title: 'Success',
+        description: 'The catch has been created',
+      })
+    },
   })
 }
 </script>

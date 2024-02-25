@@ -1,10 +1,6 @@
 <script setup lang="ts">
 const { isLogged } = useAuthState()
 
-const login = () => {
-	window.location.assign('/api/login/github')
-}
-
 const navBarLinks = computed(() => [
 	{ name: 'Home', path: '/' },
 	{ name: 'Catches', path: '/catches' },
@@ -24,6 +20,7 @@ const navBarLinks = computed(() => [
 							v-if="!link.disabled"
 							:to="link.path"
 							class="hover:text-green-600"
+							exact-active-class="text-green-600"
 							active-class="text-green-600"
 						>
 							{{ link.name }}
@@ -31,10 +28,10 @@ const navBarLinks = computed(() => [
 					</template>
 				</div>
 
-				<AccountPopover @login="login" />
+				<AccountPopover />
 			</div>
 		</div>
 
-    <NuxtPage />
+    <slot />
 	</UContainer>
 </template>

@@ -22,22 +22,24 @@ async function onSubmit (event: FormSubmitEvent<Schema>) {
   // Do something with data
   console.log(event.data)
 }
+
+definePageMeta({
+  name: 'account-informations',
+})
 </script>
 
 <template>
-  <AccountNavigation>
-    <UForm :schema="schema" :state="state" class="space-y-4" @submit="onSubmit">
-      <UFormGroup label="Name" name="name">
-        <UInput v-model="state.name" />
-      </UFormGroup>
+  <UForm :schema="schema" :state="state" class="space-y-4" @submit="onSubmit">
+    <UFormGroup label="Name" name="name">
+      <UInput v-model="state.name" />
+    </UFormGroup>
 
-      <UFormGroup label="Username" name="username">
-        <UInput v-model="state.username" />
-      </UFormGroup>
+    <UFormGroup label="Username" name="username">
+      <UInput v-model="state.username" />
+    </UFormGroup>
 
-      <UButton type="submit">
-        Update
-      </UButton>
-    </UForm>
-  </AccountNavigation>
+    <UButton type="submit">
+      Update
+    </UButton>
+  </UForm>
 </template>
