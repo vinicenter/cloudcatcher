@@ -8,10 +8,10 @@ const {
   logout,
 } = useAuthState();
 
-const deleteAccount = () => {
+const deleteAccount = async () => {
   loading.value = true
 
-  $fetch('/api/user', {
+  await $fetch('/api/user', {
     method: 'DELETE',
     onResponse: () => {
       toast.add({
