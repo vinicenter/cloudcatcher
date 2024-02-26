@@ -4,9 +4,7 @@ export const useAuthState = () => {
     status,
     error,
     refresh,
-  } = useFetch('/api/user/whoami', {
-    cache: 'reload'
-  })
+  } = useFetch('/api/user/whoami')
 
   const isLogged = computed(() => {
     return !!data.value
