@@ -4,7 +4,8 @@ const { user } = useAuthState()
 const links = [{
   label: 'My account',
   avatar: {
-    alt: user.value?.username,
+    alt: user.value?.name,
+    src: user.value?.avatar,
   },
   to: '/account/informations',
 }, {

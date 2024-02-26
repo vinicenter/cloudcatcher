@@ -15,10 +15,12 @@ export const auth = (event: H3Event) => {
         secure: !import.meta.dev
       }
     },
-    getUserAttributes: (attributes) => {
+    getUserAttributes: (user) => {
       return {
-        githubId: attributes.github_id,
-        username: attributes.username
+        githubId: user.github_id,
+        username: user.username,
+        name: user.name,
+        avatar: user.avatar
       };
     }  
   })
@@ -41,4 +43,6 @@ declare module "lucia" {
 interface DatabaseUserAttributes {
 	github_id: number;
 	username: string;
+  name: string;
+  avatar?: string;
 }

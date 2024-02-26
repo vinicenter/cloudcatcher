@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
 			headers: {
 				Authorization: `Bearer ${tokens.accessToken}`,
 				'User-Agent': 'request'
-			}		
+			}
 		});
 		const githubUser: GitHubUser = await githubUserResponse.json();
 
@@ -38,6 +38,8 @@ export default defineEventHandler(async (event) => {
     await useDB().insert(tables.users).values({
       username: githubUser.login,
       github_id: githubUser.id,
+			name: githubUser.name || githubUser.login,
+			avatar: `https://avatars.githubusercontent.com/u/${githubUser.id}`,
 			id: userId
     })
 
@@ -59,4 +61,5 @@ export default defineEventHandler(async (event) => {
 interface GitHubUser {
 	id: string;
 	login: string;
+	name: string;
 }

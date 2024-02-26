@@ -4,7 +4,9 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
   }
 
   try {
-    const isLogged = await $fetch('/api/user/whoami')
+    const isLogged = await $fetch('/api/user/whoami', {
+      cache: 'force-cache'
+    })
 
     if (!isLogged) {
       return navigateTo('/')

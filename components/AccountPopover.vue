@@ -1,28 +1,17 @@
 <script setup lang="ts">
 const {
   isLogged,
-  refresh: refreshAuthState,
+  logout,
+  logoutStatus,
   user,
 } = useAuthState()
-
-const {
-  execute: logout,
-  status: logoutStatus,
-} = useFetch('/api/logout', {
-  immediate: false,
-  onResponse: () => {
-    refreshAuthState();
-
-    window.location.assign('/')
-  },
-})
 
 const login = () => window.location.assign('/api/login/github')
 </script>
 
 <template>
   <UPopover v-if="isLogged" mode="hover" :close-delay="600">
-    <UAvatar :alt="user?.username" size="sm" />
+    <UAvatar :alt="user?.name" :src="user?.avatar" size="sm" />
 
     <template #panel>
       <div class="p-2 flex flex-col">

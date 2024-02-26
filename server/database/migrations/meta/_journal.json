@@ -15,6 +15,13 @@
       "when": 1708816416168,
       "tag": "0001_silly_squirrel_girl",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1708889393860,
+      "tag": "0002_peaceful_rachel_grey",
+      "breakpoints": true
     }
   ]
 }

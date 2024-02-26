@@ -20,7 +20,6 @@ const navBarLinks = computed(() => [
 							v-if="!link.disabled"
 							:to="link.path"
 							class="hover:text-green-600"
-							exact-active-class="text-green-600"
 							active-class="text-green-600"
 						>
 							{{ link.name }}

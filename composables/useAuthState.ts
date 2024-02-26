@@ -3,8 +3,10 @@ export const useAuthState = () => {
     data,
     status,
     error,
-    execute,
-  } = useFetch('/api/user/whoami')
+    refresh,
+  } = useFetch('/api/user/whoami', {
+    cache: 'reload'
+  })
 
   const isLogged = computed(() => {
     return !!data.value
@@ -18,12 +20,26 @@ export const useAuthState = () => {
     return status.value === 'error'
   })
 
+  const {
+    execute: logout,
+    status: logoutStatus,
+  } = useFetch('/api/logout', {
+    immediate: false,
+    onResponse: () => {
+      refresh();
+
+      window.location.assign('/')
+    },
+  })
+
   return {
     isError,
     isLoading,
     isLogged,
     user: data,
-    refresh: execute,
+    refresh,
+    logoutStatus,
+    logout,
     error
   };
 }

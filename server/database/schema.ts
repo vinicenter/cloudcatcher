@@ -10,7 +10,9 @@ export const catches = sqliteTable('catches', {
 export const users = sqliteTable("users", {
 	id: text("id").primaryKey(),
 	github_id: text("github_id").notNull().unique(),
-	username: text("username").notNull().unique()
+	username: text("username").notNull().unique(),
+	name: text("name").notNull(),
+	avatar: text("avatar")
 });
 
 export const sessions = sqliteTable("sessions", {
