@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const { isLogged } = useAuthState()
+const { data } = useAuthFetch('/api/user')
+
+const isLogged = computed(() => !!data.value);
 
 const navBarLinks = computed(() => [
 	{ name: 'Home', path: '/' },

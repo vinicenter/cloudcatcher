@@ -1,10 +1,16 @@
 <script setup lang="ts">
 const {
-  isLogged,
-  logout,
-  logoutStatus,
-  user,
-} = useAuthState()
+  data: user,
+} = useAuthFetch('/api/user')
+
+const {
+  status: logoutStatus,
+  execute: logout,
+} = useAuthFetch('/api/logout', {
+  immediate: false,
+})
+
+const isLogged = computed(() => !!user.value)
 
 const login = () => window.location.assign('/api/login/github')
 </script>

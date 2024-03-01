@@ -1,11 +1,11 @@
 <script setup lang="ts">
-const { user } = useAuthState()
+const { data } = useAuthFetch('/api/user')
 
 const links = [{
   label: 'My account',
   avatar: {
-    alt: user.value?.name,
-    src: user.value?.avatar,
+    alt: data.value?.name,
+    src: data.value?.avatar,
   },
   to: '/account/informations',
 }, {

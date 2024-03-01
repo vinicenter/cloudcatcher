@@ -3,9 +3,9 @@ import { z } from 'zod'
 import type { FormSubmitEvent } from '#ui/types'
 
 const {
-  user,
-  refresh,
-} = useAuthState()
+  data: user,
+  execute: refresh
+} = useAuthFetch('/api/user')
 
 const schema = z.object({
   name: z.string(),

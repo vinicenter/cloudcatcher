@@ -5,23 +5,28 @@ const toast = useToast();
 const loading = ref(false);
 
 const {
-  logout,
-} = useAuthState();
+  execute: logout
+} = useAuthFetch('/api/logout', {
+  immediate: false,
+  onResponse: () => {
+    window.location.assign('/')
+  },
+})
 
 const deleteAccount = async () => {
   loading.value = true
 
   await $fetch('/api/user', {
     method: 'DELETE',
-    onResponse: () => {
+    onResponse: async () => {
       toast.add({
         title: 'Account deleted',
         description: 'Your account has been deleted successfully',
       })
 
-      logout();
+      console.log('executed')
 
-      isDeleteOpen.value = false;
+      await logout();
     },
     onResponseError: () => {
       toast.add({
