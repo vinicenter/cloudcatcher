@@ -3,8 +3,12 @@ export default defineNuxtRouteMiddleware(async () => {
     return
   }
 
+  const headers = useRequestHeaders(['cookie']);
+
   try {
-    const isLogged = await authFetch('/api/user')
+    const isLogged = await $fetch('/api/user', {
+      headers
+    })
 
     if (!isLogged) {
       return navigateTo('/')

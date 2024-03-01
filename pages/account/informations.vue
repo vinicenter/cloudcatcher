@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import { z } from 'zod'
 import type { FormSubmitEvent } from '#ui/types'
+import { useAuthStore } from '~/store/useAuthStore'
 
-const {
-  data: user,
-  execute: refresh
-} = useAuthFetch('/api/user')
+const authStore = useAuthStore()
 
 const schema = z.object({
   name: z.string(),
@@ -15,8 +13,8 @@ const schema = z.object({
 type Schema = z.output<typeof schema>
 
 const state = reactive({
-  name: user.value?.name,
-  username: user.value?.username
+  name: authStore.user?.name,
+  username: authStore.user?.username
 })
 
 const toast = useToast()
@@ -34,7 +32,7 @@ async function onSubmit (event: FormSubmitEvent<Schema>) {
         description: 'Your account informations has been updated successfully',
       })
 
-      refresh()
+      authStore.getUser()
     },
     onResponseError: () => {
       toast.add({

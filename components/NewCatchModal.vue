@@ -1,9 +1,9 @@
 <script setup lang="ts">
-definePageMeta({
-  middleware: [ 'auth' ]
-})
-
 const toast = useToast()
+
+const emit = defineEmits<{
+  (e: 'refresh'): void
+}>()
 
 const submit = (e: Event) => {
   if (!(e.target instanceof HTMLFormElement)) return;
@@ -24,17 +24,21 @@ const submit = (e: Event) => {
         title: 'Success',
         description: 'The catch has been created',
       })
+
+      emit('refresh')
     },
   })
 }
 </script>
 
 <template>
-  <form @submit.prevent="submit">
-    <input name="title" placeholder="Title" required />
+  <UModal>
+    <form @submit.prevent="submit">
+      <input name="title" placeholder="Title" required />
 
-    <input type="file" name="image" placeholder="Image" required />
+      <input type="file" name="image" placeholder="Image" required />
 
-    <button type="submit">Submit</button>
-  </form>
+      <button type="submit">Submit</button>
+    </form>
+  </UModal>
 </template>

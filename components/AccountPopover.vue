@@ -1,23 +1,12 @@
 <script setup lang="ts">
-const {
-  data: user,
-} = useAuthFetch('/api/user')
+import { useAuthStore } from '~/store/useAuthStore';
 
-const {
-  status: logoutStatus,
-  execute: logout,
-} = useAuthFetch('/api/logout', {
-  immediate: false,
-})
-
-const isLogged = computed(() => !!user.value)
-
-const login = () => window.location.assign('/api/login/github')
+const authStore = useAuthStore()
 </script>
 
 <template>
-  <UPopover v-if="isLogged" mode="hover" :close-delay="600">
-    <UAvatar :alt="user?.name" :src="user?.avatar" size="sm" />
+  <UPopover v-if="authStore.isLogged" mode="hover" :close-delay="600">
+    <UAvatar :alt="authStore.user?.name" :src="authStore.user?.avatar" size="sm" />
 
     <template #panel>
       <div class="p-2 flex flex-col">
@@ -33,8 +22,8 @@ const login = () => window.location.assign('/api/login/github')
         <UDivider class="my-2" />
         
         <UButton
-          @click="logout"
-          :loading="logoutStatus === 'pending'"
+          @click="authStore.logout"
+          :loading="authStore.logoutLoading"
           variant="ghost"
         >
           Logout
@@ -43,7 +32,7 @@ const login = () => window.location.assign('/api/login/github')
     </template>
   </UPopover>
 
-  <UButton v-else @click="login">
+  <UButton v-else @click="authStore.login">
     Login
 
     <UIcon class="text-xl" name="i-mdi-github" />

@@ -22,8 +22,6 @@ export const useAuthFetch = <
   const headers = useRequestHeaders(['cookie'])
 
   return useFetch(request, {
-    ...opts,
-    headers,
     onRequestError: (error) => {
       if (error.response?.status === 401) {
         navigateTo('/')
@@ -33,6 +31,8 @@ export const useAuthFetch = <
       if (error.response?.status === 401) {
         navigateTo('/')
       }
-    }
+    },
+    ...opts,
+    headers,
   })
 }

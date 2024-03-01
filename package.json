@@ -35,6 +35,7 @@
   "devDependencies": {
     "@nuxt/ui": "^2.14.0",
     "@nuxtjs/i18n": "^8.1.1",
-    "@nuxtjs/tailwindcss": "^6.11.4"
+    "@nuxtjs/tailwindcss": "^6.11.4",
+    "@pinia/nuxt": "^0.5.1"
   }
 }

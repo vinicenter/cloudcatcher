@@ -1,17 +1,14 @@
 <script setup lang="ts">
+import { useAuthStore } from '~/store/useAuthStore'
+
 const isDeleteOpen = ref(false);
 
 const toast = useToast();
 const loading = ref(false);
 
 const {
-  execute: logout
-} = useAuthFetch('/api/logout', {
-  immediate: false,
-  onResponse: () => {
-    window.location.assign('/')
-  },
-})
+  logout
+} = useAuthStore()
 
 const deleteAccount = async () => {
   loading.value = true

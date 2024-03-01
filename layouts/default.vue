@@ -1,12 +1,7 @@
 <script setup lang="ts">
-const { data } = useAuthFetch('/api/user')
-
-const isLogged = computed(() => !!data.value);
-
 const navBarLinks = computed(() => [
 	{ name: 'Home', path: '/' },
 	{ name: 'Catches', path: '/catches' },
-	{ name: 'New catche', path: '/catches/new', disabled: !isLogged.value },
 ]);
 </script>
 
@@ -19,7 +14,6 @@ const navBarLinks = computed(() => [
 				<div class="flex gap-4">
 					<template v-for="link in navBarLinks" :key="link.path">
 						<ULink
-							v-if="!link.disabled"
 							:to="link.path"
 							class="hover:text-green-600"
 							active-class="text-green-600"

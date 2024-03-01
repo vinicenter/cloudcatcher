@@ -1,12 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ["@nuxt/ui"],
+  modules: ["@nuxt/ui", "@pinia/nuxt"],
+  pinia: {
+    storesDirs: ["~/store"],
+  },
   ui:{
     icons: ["mdi"],
-    notifications: {
-      position: 'top-0 bottom-auto'
-    }
   },
   nitro: {
     preset: "cloudflare-pages"

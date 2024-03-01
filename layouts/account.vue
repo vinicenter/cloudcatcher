@@ -1,11 +1,13 @@
 <script setup lang="ts">
-const { data } = useAuthFetch('/api/user')
+import { useAuthStore } from '~/store/useAuthStore';
+
+const authStore = useAuthStore()
 
 const links = [{
   label: 'My account',
   avatar: {
-    alt: data.value?.name,
-    src: data.value?.avatar,
+    alt: authStore.user?.name,
+    src: authStore.user?.avatar,
   },
   to: '/account/informations',
 }, {
