@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import { useAuthStore } from './store/useAuthStore';
 
-const {
-  getUser
-} = useAuthStore()
+const store = useAuthStore()
 
-getUser()
+await useAsyncData('user', () => store.getUser().then(() => true))
 </script>
 
 <template>
