@@ -10,7 +10,7 @@ const {
 const env = useRuntimeConfig()
 
 const formatImageUrl = (image: string) => {
-	return `${env.public.BUCKET_R2_PUBLIC_ENDPOINT}/${image}`
+	return `${env.public.S3_BUCKET_PUBLIC_ENDPOINT}/${image}`
 }
 
 const showNewCatchModal = ref(false)

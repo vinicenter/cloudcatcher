@@ -1,4 +1,4 @@
-import { tables, useDB } from "~/server/utils/db"
+import { tables, useDrizzle } from "~/server/utils/drizzle"
 import { authenticated } from "~/server/utils/authenticated"
 import { eq } from "drizzle-orm"
 
@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
 
   const body = await readBody(event)
 
-  await useDB().update(tables.users).set({
+  await useDrizzle().update(tables.users).set({
     name: body.name,
     username: body.username,
   }).where(eq(tables.users.id, user!.id))

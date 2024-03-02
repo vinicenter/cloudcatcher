@@ -7,9 +7,9 @@ export const initS3Client = (event: H3Event) => {
   const runtimeConfig = useRuntimeConfig(event)
 
   const s3 = new AwsClient({
-    accessKeyId: runtimeConfig.BUCKET_R2_ACCESS_KEY_ID,
-    secretAccessKey: runtimeConfig.BUCKET_R2_SECRET_ACCESS_KEY,
-    region: runtimeConfig.BUCKET_R2_REGION,
+    accessKeyId: runtimeConfig.S3_BUCKET_ACCESS_KEY_ID,
+    secretAccessKey: runtimeConfig.S3_BUCKET_SECRET_ACCESS_KEY,
+    region: runtimeConfig.S3_BUCKET_REGION,
     service: 's3'
   })
 
@@ -20,9 +20,9 @@ export const getPublicUrlForS3Object = (event: H3Event, path: BucketPaths, key: 
   const runtimeConfig = useRuntimeConfig(event)
 
   return {
-    url: `${runtimeConfig.public.BUCKET_R2_PUBLIC_ENDPOINT}/${path}/${key}`,
+    url: `${runtimeConfig.public.S3_BUCKET_PUBLIC_ENDPOINT}/${path}/${key}`,
     path: `${path}/${key}`,
-    endpoint: runtimeConfig.public.BUCKET_R2_PUBLIC_ENDPOINT,
+    endpoint: runtimeConfig.public.S3_BUCKET_PUBLIC_ENDPOINT,
   }
 }
 
@@ -31,7 +31,7 @@ export const uploadFileToBucket = async (event: H3Event, s3Client: AwsClient, pa
 
   const buffer = Buffer.from(await file.arrayBuffer())
 
-  const response = await s3Client.fetch(`${runtimeConfig.BUCKET_R2_ENDPOINT}/${path}/${file.name}`, {
+  const response = await s3Client.fetch(`${runtimeConfig.S3_BUCKET_ENDPOINT}/${path}/${file.name}`, {
     method: 'POST',
     headers: {
       'Content-Type': file.type,

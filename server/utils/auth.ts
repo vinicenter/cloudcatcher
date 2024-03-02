@@ -2,9 +2,9 @@ import { Lucia } from "lucia";
 import { DrizzleSQLiteAdapter } from "@lucia-auth/adapter-drizzle";
 import { GitHub } from "arctic";
 import { H3Event } from "h3";
-import { tables, useDB } from "./db";
+import { tables, useDrizzle } from "./drizzle";
 
-const adapter = new DrizzleSQLiteAdapter(useDB(), tables.sessions, tables.users)
+const adapter = new DrizzleSQLiteAdapter(useDrizzle(), tables.sessions, tables.users)
 
 export const auth = (event: H3Event) => {
   const runtimeConfig = useRuntimeConfig(event)

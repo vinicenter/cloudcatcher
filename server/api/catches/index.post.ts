@@ -1,6 +1,5 @@
-import { getPublicUrlForS3Object } from "~/server/utils/bucket"
-import { initS3Client } from "../../utils/bucket"
-import { tables, useDB } from "~/server/utils/db"
+import { getPublicUrlForS3Object, initS3Client } from "~/server/utils/s3-bucket"
+import { tables, useDrizzle } from "~/server/utils/drizzle"
 import { authenticated } from "~/server/utils/authenticated"
 
 export default defineEventHandler(async (event) => {
@@ -17,7 +16,7 @@ export default defineEventHandler(async (event) => {
 
   const publicUrl = getPublicUrlForS3Object(event, 'catches', image.name)
 
-  await useDB().insert(tables.catches).values({
+  await useDrizzle().insert(tables.catches).values({
     createdAt: new Date().toISOString(),
     image: publicUrl.path,
     title: title,

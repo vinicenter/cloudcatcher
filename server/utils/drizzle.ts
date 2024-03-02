@@ -10,17 +10,19 @@ export * as tables from '~/server/database/schema'
 
 let _db: DrizzleD1Database | BetterSQLite3Database | LibSQLDatabase | null = null
 
-export const useDB = () => {
+export const useDrizzle = () => {
+  const config = useRuntimeConfig()
+
   if (!_db) {
-    if (process.env.TURSO_DB_URL && process.env.TURSO_DB_TOKEN) {
+    if (config.TURSO_DB_URL && config.TURSO_DB_TOKEN) {
       // Turso in production
       _db = drizzleLibSQL(createLibSQLClient({
-        url: process.env.TURSO_DB_URL,
-        authToken: process.env.TURSO_DB_TOKEN
+        url: config.TURSO_DB_URL,
+        authToken: config.TURSO_DB_TOKEN
       }))
-    } else if (process.env.DB) {
+    } else if (config.DB) {
       // d1 in production
-      _db = drizzleD1(process.env.DB)
+      _db = drizzleD1(config.DB)
     } else if (process.dev) {
       // local sqlite in development
       const sqlite = new Database(join(process.cwd(), './db.sqlite'))

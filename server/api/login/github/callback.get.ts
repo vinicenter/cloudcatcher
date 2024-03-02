@@ -2,7 +2,7 @@ import { OAuth2RequestError } from "arctic";
 import { eq } from "drizzle-orm";
 import { generateId } from "lucia";
 import { auth } from "~/server/utils/auth";
-import { tables, useDB } from "~/server/utils/db";
+import { tables, useDrizzle } from "~/server/utils/drizzle";
 
 export default defineEventHandler(async (event) => {
 	const { lucia, github } = auth(event);
@@ -26,7 +26,7 @@ export default defineEventHandler(async (event) => {
 		});
 		const githubUser: GitHubUser = await githubUserResponse.json();
 
-    const [ existingUser ] = await useDB().select().from(tables.users).where(eq(tables.users.github_id, githubUser.id))
+    const [ existingUser ] = await useDrizzle().select().from(tables.users).where(eq(tables.users.github_id, githubUser.id))
 
 		if (existingUser) {
 			const session = await lucia.createSession(existingUser.id, {});
@@ -35,7 +35,7 @@ export default defineEventHandler(async (event) => {
 		}
 
 		const userId = generateId(15);
-    await useDB().insert(tables.users).values({
+    await useDrizzle().insert(tables.users).values({
       username: githubUser.login,
       github_id: githubUser.id,
 			name: githubUser.name || githubUser.login,
