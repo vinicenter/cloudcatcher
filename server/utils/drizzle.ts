@@ -20,9 +20,9 @@ export const useDrizzle = () => {
         url: config.TURSO_DB_URL,
         authToken: config.TURSO_DB_TOKEN
       }))
-    } else if (config.DB) {
+    } else if (process.env.DB) {
       // d1 in production
-      _db = drizzleD1(config.DB)
+      _db = drizzleD1(process.env.DB)
     } else if (process.dev) {
       // local sqlite in development
       const sqlite = new Database(join(process.cwd(), './db.sqlite'))

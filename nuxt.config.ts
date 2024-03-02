@@ -12,7 +12,6 @@ export default defineNuxtConfig({
     preset: "cloudflare-pages"
   },
   runtimeConfig: {
-    DB: process.env.DB as string,
     TURSO_DB_URL: process.env.NUXT_TURSO_DB_URL as string,
     TURSO_DB_TOKEN: process.env.NUXT_TURSO_DB_TOKEN as string,
     S3_BUCKET_ENDPOINT: process.env.NUXT_S3_BUCKET_ENDPOINT as string,
