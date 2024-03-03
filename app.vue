@@ -3,7 +3,7 @@ import { useAuthStore } from './store/useAuthStore';
 
 const store = useAuthStore()
 
-await useAsyncData('user', () => store.getUser().then(() => true))
+await useAsyncData('user', () => store.getFirstTimeUser().then(() => true))
 </script>
 
 <template>

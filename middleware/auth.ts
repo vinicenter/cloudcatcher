@@ -1,16 +1,20 @@
+import { useAuthStore } from '../store/useAuthStore'
+
 export default defineNuxtRouteMiddleware(async () => {
   if(window) {
     return
   }
 
+  const useStore = useAuthStore()
+
   const headers = useRequestHeaders(['cookie']);
 
   try {
-    const isLogged = await $fetch('/api/user', {
-      headers
-    })
+    if(!useStore.user) {
+      await useStore.getFirstTimeUser()
+    }
 
-    if (!isLogged) {
+    if (!useStore.isLogged) {
       return navigateTo('/')
     }
   } catch (error) {

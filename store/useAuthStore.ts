@@ -20,7 +20,7 @@ export const useAuthStore = defineStore('auth', {
   }),
   actions: {
     async getUser() {
-      useAuthFetch('/api/user', {
+      return useAuthFetch('/api/user', {
         onResponse: async ({response}) => {
           if(response.status === 401) {
             return
@@ -32,6 +32,13 @@ export const useAuthStore = defineStore('auth', {
           this.isLogged = true;
         }
       })
+    },
+    async getFirstTimeUser() {
+      if (!!this.user) {
+        return
+      }
+
+      return await this.getUser()
     },
     async logout() {
       try {
