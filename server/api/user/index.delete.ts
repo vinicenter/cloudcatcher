@@ -3,8 +3,6 @@ import { authenticated } from "~/server/utils/authenticated"
 import { eq } from "drizzle-orm"
 
 export default defineEventHandler(async (event) => {
-  console.log('deletou')
-
   const { user } = await authenticated(event, true)
 
   const { lucia } = auth(event)

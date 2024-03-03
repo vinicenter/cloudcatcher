@@ -1,7 +1,12 @@
 <script setup lang="ts">
+import { useAuthStore } from '../store/useAuthStore';
+
+const store = useAuthStore();
+
 const navBarLinks = computed(() => [
 	{ name: 'Home', path: '/' },
 	{ name: 'Catches', path: '/catches' },
+	{ name: 'Devices', path: '/devices', disabled: !store.isLogged },
 ]);
 </script>
 
@@ -14,6 +19,7 @@ const navBarLinks = computed(() => [
 				<div class="flex gap-4">
 					<template v-for="link in navBarLinks" :key="link.path">
 						<ULink
+							v-if="!link.disabled"
 							:to="link.path"
 							class="hover:text-green-600"
 							active-class="text-green-600"
