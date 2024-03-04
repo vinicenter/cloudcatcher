@@ -34,16 +34,14 @@ export default defineEventHandler(async (event) => {
 			return sendRedirect(event, "/");
 		}
 
-		const userId = generateId(15);
-    await useDrizzle().insert(tables.users).values({
+    const [ user ] = await useDrizzle().insert(tables.users).values({
       username: githubUser.login,
       github_id: githubUser.id,
 			name: githubUser.name || githubUser.login,
 			avatar: `https://avatars.githubusercontent.com/u/${githubUser.id}`,
-			id: userId
-    })
+    }).returning();
 
-		const session = await lucia.createSession(userId, {});
+		const session = await lucia.createSession(user.id, {});
 		appendHeader(event, "Set-Cookie", lucia.createSessionCookie(session.id).serialize());
 		return sendRedirect(event, "/");
 	} catch (e) {

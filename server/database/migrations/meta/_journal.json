@@ -5,22 +5,8 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1708747779169,
-      "tag": "0000_strange_stellaris",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1708816416168,
-      "tag": "0001_silly_squirrel_girl",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1708889393860,
-      "tag": "0002_peaceful_rachel_grey",
+      "when": 1709506097293,
+      "tag": "0000_abnormal_logan",
       "breakpoints": true
     }
   ]

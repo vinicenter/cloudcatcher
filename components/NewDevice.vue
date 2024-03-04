@@ -16,14 +16,20 @@ const submit = async (e: Event) => {
   
     const form = new FormData(e.target);
   
-    await $fetch('/api/catches', {
+    await $fetch('/api/devices', {
       method: 'POST',
-      body: form,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: {
+        name: form.get('name'),
+        description: form.get('description'),
+      },
     })
 
     toast.add({
       title: 'Success',
-      description: 'The catch has been created',
+      description: 'The device has been created',
     })
 
     emit('refresh')
@@ -44,16 +50,16 @@ const submit = async (e: Event) => {
     <UCard>
       <template #header>
         <div>
-          <h2>New catch</h2>
+          <h2>New device</h2>
         </div>
       </template>
 
       <template #default>
-        <form @submit.prevent="submit" id="new-catch-form">
+        <form @submit.prevent="submit" id="new-device-form">
           <div class="space-y-4">
-            <UInput name="title" placeholder="Title" required />
+            <UInput name="name" placeholder="Name" required />
 
-            <UInput type="file" name="image" placeholder="Image" required />
+            <UTextarea name="description" placeholder="Description" required />
           </div>
         </form>
       </template>
@@ -72,7 +78,7 @@ const submit = async (e: Event) => {
             color="primary"
             :loading="loadingSubmit"
             type="submit"
-            form="new-catch-form"
+            form="new-device-form"
           >
             Save
           </UButton>
