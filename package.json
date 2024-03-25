@@ -10,11 +10,14 @@
     "dev": "nuxt dev",
     "build": "nuxt build",
     "generate": "nuxt generate",
-    "migrate": "drizzle-kit generate:sqlite",
+    "db:generate": "drizzle-kit generate:sqlite",
+    "db:migrate": "wrangler d1 migrations apply cloudcatcher --local",
+    "db:migrate:prod": "wranger d1 migrations apply cloudcatcher",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@cloudflare/workers-types": "^4.20240320.1",
     "@iconify-json/mdi": "^1.1.64",
     "@libsql/client": "^0.5.1",
     "@lucia-auth/adapter-drizzle": "^1.0.2",
@@ -38,6 +41,8 @@
     "@nuxtjs/tailwindcss": "^6.11.4",
     "@pinia/nuxt": "^0.5.1",
     "@types/uuid": "^9.0.8",
-    "drizzle-kit": "^0.20.14"
+    "drizzle-kit": "^0.20.14",
+    "nitro-cloudflare-dev": "^0.1.4",
+    "wrangler": "^3.37.0"
   }
 }
