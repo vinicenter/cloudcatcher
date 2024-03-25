@@ -1,9 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ["@nuxt/ui", "@pinia/nuxt"],
+  modules: ["@nuxt/ui", "@pinia/nuxt", "nitro-cloudflare-dev"],
   pinia: {
-    storesDirs: ["~/store"],
+    storesDirs: [
+      "~/src/modules/account/store",
+    ],
   },
   ui:{
     icons: ["mdi"],
@@ -12,8 +14,6 @@ export default defineNuxtConfig({
     preset: "cloudflare-pages"
   },
   runtimeConfig: {
-    TURSO_DB_URL: process.env.NUXT_TURSO_DB_URL as string,
-    TURSO_DB_TOKEN: process.env.NUXT_TURSO_DB_TOKEN as string,
     S3_BUCKET_ENDPOINT: process.env.NUXT_S3_BUCKET_ENDPOINT as string,
     S3_BUCKET_ACCESS_KEY_ID: process.env.NUXT_S3_BUCKET_ACCESS_KEY_ID as string,
     S3_BUCKET_SECRET_ACCESS_KEY: process.env.NUXT_S3_BUCKET_SECRET_ACCESS_KEY as string,
@@ -23,5 +23,12 @@ export default defineNuxtConfig({
     public: {
       S3_BUCKET_PUBLIC_ENDPOINT: process.env.NUXT_S3_BUCKET_PUBLIC_ENDPOINT as string,
     }
-  }
+  },
+  extends: [
+    './src/core/',
+    './src/modules/home',
+    './src/modules/accounts',
+    './src/modules/devices',
+    './src/modules/catches',
+  ],
 })
