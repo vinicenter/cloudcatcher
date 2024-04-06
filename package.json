@@ -10,12 +10,12 @@
     "dev": "nuxt dev",
     "build": "nuxt build",
     "generate": "nuxt generate",
+    "preview": "wrangler pages dev dist/",
+    "postinstall": "nuxt prepare",
     "db:generate": "drizzle-kit generate:sqlite",
     "db:migrate": "wrangler d1 migrations apply cloudcatcher --local",
-    "db:migrate:prod": "wranger d1 migrations apply cloudcatcher",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "build-wrangler-types": "wrangler types"
+    "db:migrate:prod": "wrangler d1 migrations apply cloudcatcher",
+    "wrangler:generate-types": "wrangler types"
   },
   "dependencies": {
     "@iconify-json/mdi": "^1.1.64",
