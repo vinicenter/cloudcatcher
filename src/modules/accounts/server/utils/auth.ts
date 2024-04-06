@@ -1,15 +1,17 @@
 import { Lucia } from "lucia";
-import { DrizzleSQLiteAdapter } from "@lucia-auth/adapter-drizzle";
+import { D1Adapter } from "@lucia-auth/adapter-sqlite";
 import { GitHub } from "arctic";
 import { H3Event } from "h3";
-import { Sessions, Users } from "~/src/core/server/database/schema";
 
 export const auth = (event: H3Event) => {
-  const drizzle = event.context.drizzle
+  const D1Database = event.context.cloudflare.env.DB
 
   const runtimeConfig = useRuntimeConfig(event)
 
-  const adapter = new DrizzleSQLiteAdapter(drizzle, Sessions, Users)
+  const adapter = new D1Adapter(D1Database, {
+    user: "users",
+    session: "sessions"
+  })
 
   const luciaInstance = new Lucia(adapter, {
     sessionCookie: {
@@ -24,7 +26,7 @@ export const auth = (event: H3Event) => {
         name: user.name,
         avatar: user.avatar
       };
-    }  
+    }
   })
 
   const github = new GitHub(runtimeConfig.GITHUB_CLIENT_ID, runtimeConfig.GITHUB_CLIENT_SECRET);

@@ -5,18 +5,15 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
-  '@cloudflare/workers-types':
-    specifier: ^4.20240320.1
-    version: 4.20240320.1
   '@iconify-json/mdi':
     specifier: ^1.1.64
     version: 1.1.64
   '@libsql/client':
     specifier: ^0.5.1
     version: 0.5.2
-  '@lucia-auth/adapter-drizzle':
-    specifier: ^1.0.2
-    version: 1.0.2(lucia@3.0.1)
+  '@lucia-auth/adapter-sqlite':
+    specifier: ^3.0.1
+    version: 3.0.1(@libsql/client@0.5.2)(better-sqlite3@9.4.3)(lucia@3.0.1)
   arctic:
     specifier: ^1.2.0
     version: 1.2.0
@@ -58,6 +55,9 @@ dependencies:
     version: 3.22.4
 
 devDependencies:
+  '@cloudflare/workers-types':
+    specifier: ^4.20240320.1
+    version: 4.20240320.1
   '@nuxt/ui':
     specifier: ^2.14.0
     version: 2.14.1(nuxt@3.10.3)(rollup@4.12.0)(vite@5.1.4)(vue@3.4.19)
@@ -1706,11 +1706,20 @@ packages:
     dev: false
     optional: true
 
-  /@lucia-auth/adapter-drizzle@1.0.2(lucia@3.0.1):
-    resolution: {integrity: sha512-GT2Mp0NaUZ5O4OAvzoNcX9bGotoxBfADo6mTzIEKKJ+uar3HgtQVn/m5Ogj3I2iMv0YBHWgMmlnkUHXN5xFNow==}
+  /@lucia-auth/adapter-sqlite@3.0.1(@libsql/client@0.5.2)(better-sqlite3@9.4.3)(lucia@3.0.1):
+    resolution: {integrity: sha512-bzr8+HALrbiYMb/+oL1SAnjbgFqlPs/Kj4lO57t/VvbXzmbpQEKk5Nv6hMpvWSkGAR9LbxYeQAtecikpKZVB0w==}
     peerDependencies:
+      '@libsql/client': ^0.3.0
+      better-sqlite3: 8.x - 9.x
       lucia: 3.x
+    peerDependenciesMeta:
+      '@libsql/client':
+        optional: true
+      better-sqlite3:
+        optional: true
     dependencies:
+      '@libsql/client': 0.5.2
+      better-sqlite3: 9.4.3
       lucia: 3.0.1
     dev: false
 

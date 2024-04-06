@@ -14,13 +14,13 @@
     "db:migrate": "wrangler d1 migrations apply cloudcatcher --local",
     "db:migrate:prod": "wranger d1 migrations apply cloudcatcher",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "build-cf-types": "wrangler types"
   },
   "dependencies": {
-    "@cloudflare/workers-types": "^4.20240320.1",
     "@iconify-json/mdi": "^1.1.64",
     "@libsql/client": "^0.5.1",
-    "@lucia-auth/adapter-drizzle": "^1.0.2",
+    "@lucia-auth/adapter-sqlite": "^3.0.1",
     "arctic": "^1.2.0",
     "aws4fetch": "1.0.13",
     "better-sqlite3": "^9.4.3",
@@ -36,6 +36,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240320.1",
     "@nuxt/ui": "^2.14.0",
     "@nuxtjs/i18n": "^8.1.1",
     "@nuxtjs/tailwindcss": "^6.11.4",
