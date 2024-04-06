@@ -1,11 +1,11 @@
-import { join } from 'pathe'
 import { defineConfig } from 'drizzle-kit'
 
 export default defineConfig({
-  out: 'server/database/migrations',
-  schema: 'server/database/schema.ts',
-  driver: 'better-sqlite',
+  out: 'src/core/server/database/migrations',
+  schema: 'src/core/server/database/schema.ts',
+  driver: 'd1',
   dbCredentials: {
-    url: join(process.cwd(), './db.sqlite')
-  }
+    wranglerConfigPath: 'wrangler.toml',
+    dbName: 'cloudcatcher',
+  },
 })

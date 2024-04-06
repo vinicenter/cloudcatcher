@@ -4,8 +4,9 @@
     {
       "previewLimit": 50,
       "driver": "SQLite",
-      "database": "${workspaceFolder:cloudcatcher}/db.sqlite",
+      "database": "${workspaceFolder:cloudcatcher}/.wrangler/state/v3/d1/miniflare-D1DatabaseObject/1e8ef12b75dc19d12e80f98114c57fcd4f0ca5f85a212524451cd5f2a2b080a9.sqlite",
       "name": "cloudcatcher"
     }
   ],
+  "typescript.tsdk": "node_modules/typescript/lib",
 }
