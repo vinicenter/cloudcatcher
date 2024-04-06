@@ -3,5 +3,5 @@ name = "cloudcatcher"
 [[d1_databases]]
 binding = "DB"
 database_name = "cloudcatcher"
-database_id = "ee29c69e-ec06-47cf-bf62-5c4e55e64f22"
+database_id = "c3e48267-b8fb-4d42-b153-04ea00b014d2"
 migrations_dir = "./src/core/server/database/migrations"

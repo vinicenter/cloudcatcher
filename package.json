@@ -15,7 +15,7 @@
     "db:migrate:prod": "wranger d1 migrations apply cloudcatcher",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "build-cf-types": "wrangler types"
+    "build-wrangler-types": "wrangler types"
   },
   "dependencies": {
     "@iconify-json/mdi": "^1.1.64",
